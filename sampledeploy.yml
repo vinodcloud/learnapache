@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kublearn-apache
+  labels:
+    app: kublearn-apache
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: apacheserver
+  template:
+    metadata:
+      labels:
+        app: apacheserver
+    spec:
+      containers:
+      - name: apache-container
+        image: vinod99/learnapache:1
+        ports:
+        - containerPort: 80
+        resources:
+         requests:
+           memory: "100Mi"
+           cpu: "150m"
+         limits:
+           memory: "150Mi"
+           cpu: "200m"
+
